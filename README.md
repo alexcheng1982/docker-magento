@@ -51,6 +51,11 @@ MAGENTO_LOCALE            | Magento locale
 MAGENTO_TIMEZONE          | Magento timezone
 MAGENTO_DEFAULT_CURRENCY  | Magento default currency
 MAGENTO_URL               | Magento base url
+MAGENTO_ADMIN_FIRSTNAME   | Magento admin firstname
+MAGENTO_ADMIN_LASTNAME    | Magento admin lastname
+MAGENTO_ADMIN_EMAIL       | Magento admin email
+MAGENTO_ADMIN_USERNAME    | Magento admin username
+MAGENTO_ADMIN_PASSWORD    | Magento admin password
 
 If you want to use `install-magento` script, make sure these environment variables are passed in `docker run` with `-e` switch.
 
@@ -61,3 +66,5 @@ docker exec -it <container id> install-magento
 ```
 
 If Docker compose is used, you can just modify `env` file in the same directory of `docker-compose.yml` file to update those environment variables.
+
+After calling `install-magento`, Magento is installed and ready to use. Use provided admin username and password to log into Magento backend.
