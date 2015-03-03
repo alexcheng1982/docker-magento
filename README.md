@@ -1,2 +1,1 @@
-# docker-magento
-Magento
+# Docker image for Magento
