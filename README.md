@@ -1,6 +1,6 @@
 # Docker image for Magento
 
-This repo creates a Docker image for [Magento](http://magento.com/) 1.9.
+This repo creates a Docker image for [Magento](http://magento.com/).
 
 ## How to use
 
@@ -13,6 +13,8 @@ docker run -p 80:80 alexcheng/magento
 ```
 
 Then finish Magento installation using web UI.
+
+Magento is installed into `/var/www/htdocs` folder.
 
 ### Use Docker Compose
 
