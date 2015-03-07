@@ -59,7 +59,7 @@ MAGENTO_ADMIN_PASSWORD    | Magento admin password
 
 If you want to use `install-magento` script, make sure these environment variables are passed in `docker run` with `-e` switch.
 
-After Docker container started, use `docker exec` to call `install-magento` script.
+After Docker container started, use `docker ps` to find container id of image `alexcheng/magento`, then use `docker exec` to call `install-magento` script.
 
 ```bash
 docker exec -it <container id> install-magento
