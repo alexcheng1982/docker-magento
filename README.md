@@ -52,8 +52,8 @@ Then use `docker-compose up -d` to start MySQL and Magento server.
 
 A Magento install script is also provided as `/usr/local/bin/install-magento`. This script can install Magento without using web UI. This script requires certain environment variables to run:
 
-Environment variable      | Description               | Default value (used by Docker Compose - `env` file)
---------------------      | -----------
+Environment variable      | Description | Default value (used by Docker Compose - `env` file)
+--------------------      | ----------- | ---------------------------
 MYSQL_HOST                | MySQL host  | mysql
 MYSQL_DATABASE            | MySQL db name for Magento | magento
 MYSQL_USER                | MySQL username | magento
