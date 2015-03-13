@@ -2,9 +2,18 @@
 
 This repo creates a Docker image for [Magento](http://magento.com/).
 
+## Magento versions
+
+Version | Git branch | Tag name
+--------| ---------- |---------
+1.9.1.0 | master     | latest
+1.8.1.0 | 1.8.1.0    | 1.8.1.0
+1.7.0.2 | 1.7.0.2    | 1.7.0.2
+1.6.2.0 | 1.6.2.0    | 1.6.2.0
+
 ## How to use
 
-### Use `docker run`
+### Use as standalone container
 
 You can use `docker run` to run this image directly.
 
@@ -18,7 +27,7 @@ Magento is installed into `/var/www/htdocs` folder.
 
 ### Use Docker Compose
 
-[Docker Compose](https://docs.docker.com/compose/) is another way to run this image with MySQL database.
+[Docker Compose](https://docs.docker.com/compose/) is the recommended way to run this image with MySQL database.
 
 A sample `docker-compose.yml` can be found in this repo.
 
@@ -37,29 +46,29 @@ mysql:
     - env
 ```
 
-Then use `docker-compose up` to start MySQL and Magento server.
+Then use `docker-compose up -d` to start MySQL and Magento server.
 
 ## Magento install script
 
-A Magento install script is also provided as `install-magento`. This script requires certain environment variables to run:
+A Magento install script is also provided as `/usr/local/bin/install-magento`. This script can install Magento without using web UI. This script requires certain environment variables to run:
 
-Environment variable      | Description
+Environment variable      | Description               | Default value (used by Docker Compose - `env` file)
 --------------------      | -----------
-MYSQL_HOST                | MySQL host
-MYSQL_DATABASE            | MySQL db name for Magento
-MYSQL_USER                | MySQL username
-MYSQL_PASSWORD            | MySQL password
-MAGENTO_LOCALE            | Magento locale
-MAGENTO_TIMEZONE          | Magento timezone
-MAGENTO_DEFAULT_CURRENCY  | Magento default currency
-MAGENTO_URL               | Magento base url
-MAGENTO_ADMIN_FIRSTNAME   | Magento admin firstname
-MAGENTO_ADMIN_LASTNAME    | Magento admin lastname
-MAGENTO_ADMIN_EMAIL       | Magento admin email
-MAGENTO_ADMIN_USERNAME    | Magento admin username
-MAGENTO_ADMIN_PASSWORD    | Magento admin password
+MYSQL_HOST                | MySQL host  | mysql
+MYSQL_DATABASE            | MySQL db name for Magento | magento
+MYSQL_USER                | MySQL username | magento
+MYSQL_PASSWORD            | MySQL password | magento
+MAGENTO_LOCALE            | Magento locale | en_GB
+MAGENTO_TIMEZONE          | Magento timezone |Pacific/Auckland
+MAGENTO_DEFAULT_CURRENCY  | Magento default currency | NZD
+MAGENTO_URL               | Magento base url | http://mymagentostore.com
+MAGENTO_ADMIN_FIRSTNAME   | Magento admin firstname | Admin
+MAGENTO_ADMIN_LASTNAME    | Magento admin lastname | MyStore
+MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@mymagentostore.com
+MAGENTO_ADMIN_USERNAME    | Magento admin username | admin
+MAGENTO_ADMIN_PASSWORD    | Magento admin password | magentorocks1
 
-If you want to use `install-magento` script, make sure these environment variables are passed in `docker run` with `-e` switch.
+If you want to use `install-magento` script and this images is started using `docker run`, make sure these environment variables are passed in `docker run` with `-e` switch.
 
 After Docker container started, use `docker ps` to find container id of image `alexcheng/magento`, then use `docker exec` to call `install-magento` script.
 
@@ -67,6 +76,6 @@ After Docker container started, use `docker ps` to find container id of image `a
 docker exec -it <container id> install-magento
 ```
 
-If Docker compose is used, you can just modify `env` file in the same directory of `docker-compose.yml` file to update those environment variables.
+If Docker Compose is used, you can just modify `env` file in the same directory of `docker-compose.yml` file to update those environment variables.
 
 After calling `install-magento`, Magento is installed and ready to use. Use provided admin username and password to log into Magento backend.
