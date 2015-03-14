@@ -48,9 +48,29 @@ mysql:
 
 Then use `docker-compose up -d` to start MySQL and Magento server.
 
-## Magento install script
+## Magento sample data
 
-A Magento install script is also provided as `/usr/local/bin/install-magento`. This script can install Magento without using web UI. This script requires certain environment variables to run:
+Installation scripts for Magento sample data are also provided.
+
+__Please note:__ Sample data must be installed __before__ Magento itself.
+
+### Magento 1.9
+
+Use `/usr/local/bin/install-sampledata-1.9` to install sample data for Magento 1.9.
+
+```bash
+docker exec -it <container id> install-sampledata-1.9
+```
+
+Sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data).
+
+### Magento 1.6, 1.7 & 1.8
+
+TBD
+
+## Magento installation script
+
+A Magento installation script is also provided as `/usr/local/bin/install-magento`. This script can install Magento without using web UI. This script requires certain environment variables to run:
 
 Environment variable      | Description | Default value (used by Docker Compose - `env` file)
 --------------------      | ----------- | ---------------------------
