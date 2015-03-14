@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cd /tmp
+cp /opt/magento-sample-data-1.9.1.0.tgz .
+tar xvf magento-sample-data-1.9.1.0.tgz
+cp -R magento-sample-data-1.9.1.0/media/* /var/www/htdocs/media/
+cp -R magento-sample-data-1.9.1.0/skin/* /var/www/htdocs/skin/
+chown -R www-data:www-data /var/www/htdocs/media
+
+mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < magento-sample-data-1.9.1.0/magento_sample_data_for_1.9.1.0.sql
