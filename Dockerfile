@@ -6,6 +6,8 @@ RUN chown -R www-data:www-data /var/www/htdocs
 
 RUN apt-get update
 RUN apt-get install -y mysql-client-5.5
+RUN apt-get install libxml2-dev
+RUN docker-php-ext-install soap
 
 COPY ./bin/install-magento /usr/local/bin/install-magento
 
