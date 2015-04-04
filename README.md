@@ -56,10 +56,10 @@ __Please note:__ Sample data must be installed __before__ Magento itself.
 
 ### Magento 1.9
 
-Use `/usr/local/bin/install-sampledata-1.9` to install sample data for Magento 1.9.
+Use `/usr/local/bin/install-sampledata` to install sample data for Magento 1.9.
 
 ```bash
-docker exec -it <container id> install-sampledata-1.9
+docker exec -it <container id> install-sampledata
 ```
 
 Sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data).
