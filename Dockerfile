@@ -13,6 +13,6 @@ COPY ./bin/install-magento /usr/local/bin/install-magento
 
 RUN chmod +x /usr/local/bin/install-magento
 
-COPY ./sampledata/magento-sample-data-1.9.1.0.tgz /opt/
-COPY ./bin/install-sampledata-1.9 /usr/local/bin/install-sampledata
+COPY ./sampledata/magento-sample-data-1.6.1.0.tar.gz /opt/
+COPY ./bin/install-sampledata-1.6_1.8 /usr/local/bin/install-sampledata
 RUN chmod +x /usr/local/bin/install-sampledata
