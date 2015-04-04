@@ -50,11 +50,9 @@ Then use `docker-compose up -d` to start MySQL and Magento server.
 
 ## Magento sample data
 
-Installation scripts for Magento sample data are also provided.
+Installation script for Magento sample data is also provided.
 
 __Please note:__ Sample data must be installed __before__ Magento itself.
-
-### Magento 1.9
 
 Use `/usr/local/bin/install-sampledata` to install sample data for Magento 1.9.
 
@@ -62,11 +60,7 @@ Use `/usr/local/bin/install-sampledata` to install sample data for Magento 1.9.
 docker exec -it <container id> install-sampledata
 ```
 
-Sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data).
-
-### Magento 1.6, 1.7 & 1.8
-
-TBD
+Magento 1.9 sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data). Magento 1.6 - 1.8 uses the [official sample data](http://devdocs.magento.com/guides/m1x/ce18-ee113/ht_magento-ce-sample.data.html).
 
 ## Magento installation script
 
