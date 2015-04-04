@@ -54,7 +54,7 @@ Installation script for Magento sample data is also provided.
 
 __Please note:__ Sample data must be installed __before__ Magento itself.
 
-Use `/usr/local/bin/install-sampledata` to install sample data for Magento 1.9.
+Use `/usr/local/bin/install-sampledata` to install sample data for Magento.
 
 ```bash
 docker exec -it <container id> install-sampledata
