@@ -93,3 +93,5 @@ docker exec -it <container id> install-magento
 If Docker Compose is used, you can just modify `env` file in the same directory of `docker-compose.yml` file to update those environment variables.
 
 After calling `install-magento`, Magento is installed and ready to use. Use provided admin username and password to log into Magento backend.
+
+If you use default base url (http://mymagentostore.com) or other test url, you need to [modify your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/) to map the host name to docker container. For Boot2Docker, use `boot2docker ip` to find the IP address.
