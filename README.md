@@ -21,7 +21,7 @@ You can use `docker run` to run this image directly.
 docker run -p 80:80 alexcheng/magento
 ```
 
-Then finish Magento installation using web UI.
+Then finish Magento installation using web UI. You need to have an existing MySQL server.
 
 Magento is installed into `/var/www/htdocs` folder.
 
@@ -82,7 +82,7 @@ MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@mymagentostore.com
 MAGENTO_ADMIN_USERNAME    | Magento admin username | admin
 MAGENTO_ADMIN_PASSWORD    | Magento admin password | magentorocks1
 
-If you want to use `install-magento` script and this images is started using `docker run`, make sure these environment variables are passed in `docker run` with `-e` switch.
+If you want to use `install-magento` script and this images is started as a standalone container using `docker run`, make sure these environment variables are passed in `docker run` with `-e` switch.
 
 After Docker container started, use `docker ps` to find container id of image `alexcheng/magento`, then use `docker exec` to call `install-magento` script.
 
