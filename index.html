@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Docker-magento by alexcheng1982</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Docker-magento</h1>
+      <h2 class="project-tagline">Docker image for Magento</h2>
+      <a href="https://github.com/alexcheng1982/docker-magento" class="btn">View on GitHub</a>
+      <a href="https://github.com/alexcheng1982/docker-magento/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/alexcheng1982/docker-magento/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="docker-image-for-magento" class="anchor" href="#docker-image-for-magento" aria-hidden="true"><span class="octicon octicon-link"></span></a>Docker image for Magento</h1>
+
+<p>This repo creates a Docker image for <a href="http://magento.com/">Magento</a>.</p>
+
+<h2>
+<a id="magento-versions" class="anchor" href="#magento-versions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Magento versions</h2>
+
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Git branch</th>
+<th>Tag name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.9.1.0</td>
+<td>master</td>
+<td>latest</td>
+</tr>
+<tr>
+<td>1.8.1.0</td>
+<td>1.8.1.0</td>
+<td>1.8.1.0</td>
+</tr>
+<tr>
+<td>1.7.0.2</td>
+<td>1.7.0.2</td>
+<td>1.7.0.2</td>
+</tr>
+<tr>
+<td>1.6.2.0</td>
+<td>1.6.2.0</td>
+<td>1.6.2.0</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<h3>
+<a id="use-as-standalone-container" class="anchor" href="#use-as-standalone-container" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use as standalone container</h3>
+
+<p>You can use <code>docker run</code> to run this image directly.</p>
+
+<div class="highlight highlight-bash"><pre>docker run -p 80:80 alexcheng/magento</pre></div>
+
+<p>Then finish Magento installation using web UI. You need to have an existing MySQL server.</p>
+
+<p>Magento is installed into <code>/var/www/htdocs</code> folder.</p>
+
+<h3>
+<a id="use-docker-compose" class="anchor" href="#use-docker-compose" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Docker Compose</h3>
+
+<p><a href="https://docs.docker.com/compose/">Docker Compose</a> is the recommended way to run this image with MySQL database.</p>
+
+<p>A sample <code>docker-compose.yml</code> can be found in this repo.</p>
+
+<div class="highlight highlight-yaml"><pre><span class="pl-s"><span class="pl-ent">web:</span></span>
+  <span class="pl-s"><span class="pl-ent">image:</span> <span class="pl-s">alexcheng/magento</span></span>
+  <span class="pl-s"><span class="pl-ent">ports:</span></span>
+    <span class="pl-s">- <span class="pl-s"><span class="pl-pds">"</span>80:80<span class="pl-pds">"</span></span></span>
+  <span class="pl-s"><span class="pl-ent">links:</span></span>
+    <span class="pl-s">- <span class="pl-s">mysql</span></span>
+  <span class="pl-s"><span class="pl-ent">env_file:</span></span>
+    <span class="pl-s">- <span class="pl-s">env</span></span>
+<span class="pl-s"><span class="pl-ent">mysql:</span></span>
+  <span class="pl-s"><span class="pl-ent">image:</span> <span class="pl-s">mysql:5.6.23</span></span>
+  <span class="pl-s"><span class="pl-ent">env_file:</span></span>
+    <span class="pl-s">- <span class="pl-s">env</span></span></pre></div>
+
+<p>Then use <code>docker-compose up -d</code> to start MySQL and Magento server.</p>
+
+<h2>
+<a id="magento-sample-data" class="anchor" href="#magento-sample-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Magento sample data</h2>
+
+<p>Installation script for Magento sample data is also provided.</p>
+
+<p><strong>Please note:</strong> Sample data must be installed <strong>before</strong> Magento itself.</p>
+
+<p>Use <code>/usr/local/bin/install-sampledata</code> to install sample data for Magento.</p>
+
+<div class="highlight highlight-bash"><pre>docker <span class="pl-c1">exec</span> -it <span class="pl-k">&lt;</span>container id<span class="pl-k">&gt;</span> install-sampledata</pre></div>
+
+<p>Magento 1.9 sample data is compressed version from <a href="https://github.com/Vinai/compressed-magento-sample-data">Vinai/compressed-magento-sample-data</a>. Magento 1.6 - 1.8 uses the <a href="http://devdocs.magento.com/guides/m1x/ce18-ee113/ht_magento-ce-sample.data.html">official sample data</a>.</p>
+
+<h2>
+<a id="magento-installation-script" class="anchor" href="#magento-installation-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>Magento installation script</h2>
+
+<p>A Magento installation script is also provided as <code>/usr/local/bin/install-magento</code>. This script can install Magento without using web UI. This script requires certain environment variables to run:</p>
+
+<table>
+<thead>
+<tr>
+<th>Environment variable</th>
+<th>Description</th>
+<th>Default value (used by Docker Compose - <code>env</code> file)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYSQL_HOST</td>
+<td>MySQL host</td>
+<td>mysql</td>
+</tr>
+<tr>
+<td>MYSQL_DATABASE</td>
+<td>MySQL db name for Magento</td>
+<td>magento</td>
+</tr>
+<tr>
+<td>MYSQL_USER</td>
+<td>MySQL username</td>
+<td>magento</td>
+</tr>
+<tr>
+<td>MYSQL_PASSWORD</td>
+<td>MySQL password</td>
+<td>magento</td>
+</tr>
+<tr>
+<td>MAGENTO_LOCALE</td>
+<td>Magento locale</td>
+<td>en_GB</td>
+</tr>
+<tr>
+<td>MAGENTO_TIMEZONE</td>
+<td>Magento timezone</td>
+<td>Pacific/Auckland</td>
+</tr>
+<tr>
+<td>MAGENTO_DEFAULT_CURRENCY</td>
+<td>Magento default currency</td>
+<td>NZD</td>
+</tr>
+<tr>
+<td>MAGENTO_URL</td>
+<td>Magento base url</td>
+<td><a href="http://mymagentostore.com">http://mymagentostore.com</a></td>
+</tr>
+<tr>
+<td>MAGENTO_ADMIN_FIRSTNAME</td>
+<td>Magento admin firstname</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>MAGENTO_ADMIN_LASTNAME</td>
+<td>Magento admin lastname</td>
+<td>MyStore</td>
+</tr>
+<tr>
+<td>MAGENTO_ADMIN_EMAIL</td>
+<td>Magento admin email</td>
+<td><a href="mailto:amdin@mymagentostore.com">amdin@mymagentostore.com</a></td>
+</tr>
+<tr>
+<td>MAGENTO_ADMIN_USERNAME</td>
+<td>Magento admin username</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>MAGENTO_ADMIN_PASSWORD</td>
+<td>Magento admin password</td>
+<td>magentorocks1</td>
+</tr>
+</tbody>
+</table>
+
+<p>If you want to use <code>install-magento</code> script and this images is started as a standalone container using <code>docker run</code>, make sure these environment variables are passed in <code>docker run</code> with <code>-e</code> switch.</p>
+
+<p>After Docker container started, use <code>docker ps</code> to find container id of image <code>alexcheng/magento</code>, then use <code>docker exec</code> to call <code>install-magento</code> script.</p>
+
+<div class="highlight highlight-bash"><pre>docker <span class="pl-c1">exec</span> -it <span class="pl-k">&lt;</span>container id<span class="pl-k">&gt;</span> install-magento</pre></div>
+
+<p>If Docker Compose is used, you can just modify <code>env</code> file in the same directory of <code>docker-compose.yml</code> file to update those environment variables.</p>
+
+<p>After calling <code>install-magento</code>, Magento is installed and ready to use. Use provided admin username and password to log into Magento backend.</p>
+
+<p>If you use default base url (<a href="http://mymagentostore.com">http://mymagentostore.com</a>) or other test url, you need to <a href="http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/">modify your host file</a> to map the host name to docker container. For Boot2Docker, use <code>boot2docker ip</code> to find the IP address.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/alexcheng1982/docker-magento">Docker-magento</a> is maintained by <a href="https://github.com/alexcheng1982">alexcheng1982</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-64397833-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
+
