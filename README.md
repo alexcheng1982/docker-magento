@@ -75,10 +75,10 @@ MYSQL_PASSWORD            | MySQL password | magento
 MAGENTO_LOCALE            | Magento locale | en_GB
 MAGENTO_TIMEZONE          | Magento timezone |Pacific/Auckland
 MAGENTO_DEFAULT_CURRENCY  | Magento default currency | NZD
-MAGENTO_URL               | Magento base url | http://mymagentostore.com
+MAGENTO_URL               | Magento base url | http://local.magento
 MAGENTO_ADMIN_FIRSTNAME   | Magento admin firstname | Admin
 MAGENTO_ADMIN_LASTNAME    | Magento admin lastname | MyStore
-MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@mymagentostore.com
+MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@example.com
 MAGENTO_ADMIN_USERNAME    | Magento admin username | admin
 MAGENTO_ADMIN_PASSWORD    | Magento admin password | magentorocks1
 
@@ -94,4 +94,4 @@ If Docker Compose is used, you can just modify `env` file in the same directory 
 
 After calling `install-magento`, Magento is installed and ready to use. Use provided admin username and password to log into Magento backend.
 
-If you use default base url (http://mymagentostore.com) or other test url, you need to [modify your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/) to map the host name to docker container. For Boot2Docker, use `boot2docker ip` to find the IP address.
+If you use default base url (http://local.magento) or other test url, you need to [modify your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/) to map the host name to docker container. For Boot2Docker, use `boot2docker ip` to find the IP address.
