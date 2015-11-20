@@ -95,4 +95,5 @@ If Docker Compose is used, you can just modify `env` file in the same directory 
 After calling `install-magento`, Magento is installed and ready to use. Use provided admin username and password to log into Magento backend.
 
 If you use default base url (http://local.magento) or other test url, you need to [modify your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/) to map the host name to docker container. For Boot2Docker, use `boot2docker ip` to find the IP address.
+
 **Important**: If you do not use the deafult `MAGENTO_URL` you must use a hostname that contains a dot within it (e.g `foo.bar`), otherwise the [Magento admin panel login won't work](http://magento.stackexchange.com/a/7773).
