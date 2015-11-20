@@ -1,6 +1,6 @@
 FROM occitech/magento:php5.5-apache
 
-RUN cd /tmp && curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/1.9.1.0 -o 1.9.1.0.tar.gz && tar xvf 1.9.1.0.tar.gz && mv magento-mirror-1.9.1.0/* magento-mirror-1.9.1.0/.htaccess /var/www/htdocs
+RUN cd /tmp && curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/1.9.2.2 -o 1.9.2.2.tar.gz && tar xvf 1.9.2.2.tar.gz && mv magento-mirror-1.9.2.2/* magento-mirror-1.9.2.2/.htaccess /var/www/htdocs
 
 RUN chown -R www-data:www-data /var/www/htdocs
 
