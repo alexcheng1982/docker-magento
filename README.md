@@ -6,7 +6,7 @@ This repo creates a Docker image for [Magento](http://magento.com/).
 
 Version | Git branch | Tag name
 --------| ---------- |---------
-1.9.2.2 | master     | latest
+1.9.2.3 | master     | latest
 1.9.1.0 | 1.9.1.0    | 1.9.1.0
 1.8.1.0 | 1.8.1.0    | 1.8.1.0
 1.7.0.2 | 1.7.0.2    | 1.7.0.2
