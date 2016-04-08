@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y mysql-client-5.5 libxml2-dev
 RUN docker-php-ext-install soap
 
 COPY ./bin/install-magento /usr/local/bin/install-magento
+#COPY redis.conf /var/www/htdocs/app/etc/
 
 RUN chmod +x /usr/local/bin/install-magento
 

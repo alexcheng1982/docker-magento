@@ -98,3 +98,7 @@ After calling `install-magento`, Magento is installed and ready to use. Use prov
 If you use default base url (http://local.magento) or other test url, you need to [modify your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/) to map the host name to docker container. For Boot2Docker, use `boot2docker ip` to find the IP address.
 
 **Important**: If you do not use the default `MAGENTO_URL` you must use a hostname that contains a dot within it (e.g `foo.bar`), otherwise the [Magento admin panel login won't work](http://magento.stackexchange.com/a/7773).
+
+## Redis Cache
+
+If you want to use Redis as Cache backend see comments in Dockerfile and bin/install-magento
