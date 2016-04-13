@@ -11,6 +11,11 @@ Version | Git branch | Tag name
 1.7.0.2 | 1.7.0.2    | 1.7.0.2
 1.6.2.0 | 1.6.2.0    | 1.6.2.0
 
+## For v1.7.0.2
+
+PHP 5.4 support patch has been applied to this Magento version. Magento 1.7.0.2 has an issue to work with MySQL 5.6.
+To enable MySQL 5.6 support, run script `enable-mysql-5.6-support` to apply the core fix from [StackOverflow](http://stackoverflow.com/questions/15443448/magento-install-complains-about-missing-innodb-when-it-is-available).
+
 ## How to use
 
 ### Use as standalone container
@@ -32,18 +37,21 @@ Magento is installed into `/var/www/htdocs` folder.
 A sample `docker-compose.yml` can be found in this repo.
 
 ```yaml
-web:
-  image: alexcheng/magento
-  ports:
-    - "80:80"
-  links:
-    - mysql
-  env_file:
-    - env
-mysql:
-  image: mysql:5.6.23
-  env_file:
-    - env
+version: '2'
+services:
+  web:
+    image: alexcheng/magento:1.7.0.2
+    ports:
+      - "80:80"
+    links:
+      - mysql
+    env_file:
+      - env
+  mysql:
+    image: mysql:5.6.23
+    env_file:
+      - env
+
 ```
 
 Then use `docker-compose up -d` to start MySQL and Magento server.

@@ -7,3 +7,5 @@ cp -R magento-sample-data-1.6.1.0/media/* /var/www/htdocs/media/
 chown -R www-data:www-data /var/www/htdocs/media
 
 mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < magento-sample-data-1.6.1.0/magento_sample_data_for_1.6.1.0.sql
+
+mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD -e "update core_resource set version='1.6.0.0.14', data_version='1.6.0.0.14' where code='catalog_setup';update core_resource set version='1.6.0.3', data_version='1.6.0.3' where code='salesrule_setup';update core_resource set version='1.6.0.0.1', data_version='1.6.0.0.1' where code='reports_setup';insert into core_resource(code,version,data_version) values ('oauth_setup','1.0.0.0','1.0.0.0'), ('captcha_setup', '1.7.0.0.0', '1.7.0.0.0'), ('api2_setup', '1.0.0.0', '1.0.0.0');" $MYSQL_DATABASE
