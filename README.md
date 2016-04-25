@@ -83,10 +83,10 @@ MYSQL_PASSWORD            | MySQL password | magento
 MAGENTO_LOCALE            | Magento locale | en_GB
 MAGENTO_TIMEZONE          | Magento timezone |Pacific/Auckland
 MAGENTO_DEFAULT_CURRENCY  | Magento default currency | NZD
-MAGENTO_URL               | Magento base url | http://mymagentostore.com
+MAGENTO_URL               | Magento base url | http://local.magento
 MAGENTO_ADMIN_FIRSTNAME   | Magento admin firstname | Admin
 MAGENTO_ADMIN_LASTNAME    | Magento admin lastname | MyStore
-MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@mymagentostore.com
+MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@example.com
 MAGENTO_ADMIN_USERNAME    | Magento admin username | admin
 MAGENTO_ADMIN_PASSWORD    | Magento admin password | magentorocks1
 
