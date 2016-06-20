@@ -12,8 +12,8 @@ This repo creates a Docker image for [Magento 1.x](http://magento.com/).
 
 Version | Git branch | Tag name
 --------| ---------- |---------
-1.9.2.3 | master     | latest
-1.9.1.0 | 1.9.1.0    | 1.9.1.0
+1.9.2.4 | master     | latest
+1.9.1.0 | 1.9.1.0    | 1.9.1.1
 1.8.1.0 | 1.8.1.0    | 1.8.1.0
 1.7.0.2 | 1.7.0.2    | 1.7.0.2
 1.6.2.0 | 1.6.2.0    | 1.6.2.0
