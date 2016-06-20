@@ -1,6 +1,12 @@
-# Docker image for Magento
+# Docker image for Magento 1.x
 
-This repo creates a Docker image for [Magento](http://magento.com/).
+This repo creates a Docker image for [Magento 1.x](http://magento.com/).
+
+#### Please note
+
+> The primary goal of this repo is to create Docker images for Magento 1.x development and testing, especially for extensions and themes development. It lacks essential support for production deployment, e.g. Varnish and Redis. Use this wisely for production deployment.
+
+> This repo is only for Magento 1.x. If you are looking for Magento 2.x, check out [alexcheng1982/docker-magento2](https://github.com/alexcheng1982/docker-magento2).
 
 ## Magento versions
 
