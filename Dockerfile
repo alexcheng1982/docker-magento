@@ -7,4 +7,7 @@ RUN docker-php-ext-install soap
 
 COPY ./bin/entrypoint /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
+
+USER 1000
+
 ENTRYPOINT entrypoint

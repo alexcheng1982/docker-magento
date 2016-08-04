@@ -7,12 +7,11 @@ else
 echo "Creating Mangeto CE Project";
 rm -rf ./*
 find ./ -type f -name '.*' -exec rm '{}' \;
+cd /tmp && curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && tar xvf $MAGENTO_VERSION.tar.gz && mv magento-mirror-$MAGENTO_VERSION/* magento-mirror-$MAGENTO_VERSION/.htaccess /var/www/htdocs
 echo "sample data deploying";
 install-sampledata
 echo "sample data deployed";
 echo "installing Magento 1.9";
-cd /tmp && curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && tar xvf $MAGENTO_VERSION.tar.gz && mv magento-mirror-$MAGENTO_VERSION/* magento-mirror-$MAGENTO_VERSION/.htaccess /var/www/htdocs
-chown -R www-data:www-data /var/www/htdocs
 php -f /var/www/htdocs/install.php -- \
 	--license_agreement_accepted "yes" --locale $MAGENTO_LOCALE --timezone $MAGENTO_TIMEZONE \
 	 --default_currency $MAGENTO_DEFAULT_CURRENCY --db_host $MYSQL_HOST --db_name $MYSQL_DATABASE \
@@ -21,6 +20,7 @@ php -f /var/www/htdocs/install.php -- \
 	 --use_secure "no" --secure_base_url "" --use_secure_admin "no" \
 	 --admin_firstname $MAGENTO_ADMIN_FIRSTNAME --admin_lastname $MAGENTO_ADMIN_LASTNAME \
 	 --admin_email $MAGENTO_ADMIN_EMAIL --admin_username $MAGENTO_ADMIN_USERNAME --admin_password $MAGENTO_ADMIN_PASSWORD
+chown -R www-data:www-data /var/www/htdocs
 echo "Magento 1.9 installed";
 touch /var/www/htdocs/sailthru.txt
 fi
