@@ -1,0 +1,3 @@
+[submodule "sailthru-magento-extension"]
+	path = sailthru-magento-extension
+	url = git@github.com:sailthru/sailthru-magento-extension.git

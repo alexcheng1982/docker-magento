@@ -1,7 +1,8 @@
 web:
   build: .
   volumes:
-    - ./magento:/var/www/htdocs
+    - ./magento:/var/www/html
+    - ./sailthru-magento-extension:/var/www/sailthru
     - ./bin/install-magento:/usr/local/bin/install-magento
     - ./sampledata/magento-sample-data-1.9.1.0.tgz:/opt/magento-sample-data-1.9.1.0.tgz
     - ./bin/install-sampledata-1.9:/usr/local/bin/install-sampledata
@@ -18,7 +19,7 @@ web:
     - MAGENTO_LOCALE=en_GB
     - MAGENTO_TIMEZONE=Pacific/Auckland
     - MAGENTO_DEFAULT_CURRENCY=NZD
-    - MAGENTO_URL=http://local.magento
+    - MAGENTO_URL=local.magento
     - MAGENTO_ADMIN_FIRSTNAME=Admin
     - MAGENTO_ADMIN_LASTNAME=MyStore
     - MAGENTO_ADMIN_EMAIL=amdin@example.com

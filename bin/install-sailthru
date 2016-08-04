@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd /var/www/html
+modman init  # Only if I haven't already run it before
+modman link /var/www/sailthru
