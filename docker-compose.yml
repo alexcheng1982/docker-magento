@@ -24,7 +24,7 @@ services:
       - MAGENTO_URL=local.magento
       - MAGENTO_ADMIN_FIRSTNAME=Admin
       - MAGENTO_ADMIN_LASTNAME=MyStore
-      - MAGENTO_ADMIN_EMAIL=asilverman@sailthru.com
+      - MAGENTO_ADMIN_EMAIL=admin@example.com
       - MAGENTO_ADMIN_USERNAME=admin
       - MAGENTO_ADMIN_PASSWORD=magentorocks1
     depends_on:
