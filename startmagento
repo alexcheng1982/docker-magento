@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+docker-compose up
+URL="$(docker exec dockermagento_web_1 bash -c 'echo $MAGENTO_URL')"
+IP="$(docker-machine ip)"
+echo "${IP} local.magento" >> /etc/hosts

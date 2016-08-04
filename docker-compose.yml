@@ -1,12 +1,39 @@
-web:
-  image: alexcheng/magento
-  ports:
-    - "80:80"
-  links:
-    - mysql
-  env_file:
-    - env
-mysql:
-  image: mysql:5.6.23
-  env_file:
-    - env
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - ./magento:/var/www/html
+      - ./sailthru-magento-extension:/var/www/sailthru
+      - ./bin/install-magento:/usr/local/bin/install-magento
+      - ./sampledata/magento-sample-data-1.9.1.0.tgz:/opt/magento-sample-data-1.9.1.0.tgz
+      - ./bin/install-sampledata-1.9:/usr/local/bin/install-sampledata
+    ports:
+      - "80:80"
+    links:
+      - mysql
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
+      - MYSQL_DATABASE=magento
+      - MAGENTO_LOCALE=en_US
+      - MAGENTO_TIMEZONE=America/New_York
+      - MAGENTO_DEFAULT_CURRENCY=USD
+      - MAGENTO_URL=local.magento
+      - MAGENTO_ADMIN_FIRSTNAME=Admin
+      - MAGENTO_ADMIN_LASTNAME=MyStore
+      - MAGENTO_ADMIN_EMAIL=admin@example.com
+      - MAGENTO_ADMIN_USERNAME=admin
+      - MAGENTO_ADMIN_PASSWORD=magentorocks1
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.6.23
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
+      - MYSQL_DATABASE=magento

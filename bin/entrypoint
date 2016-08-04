@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+chmod +x /usr/local/bin/install-magento
+su -c install-magento

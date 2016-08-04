@@ -1,7 +1,43 @@
 #!/usr/bin/env bash
-
-php -f /var/www/htdocs/install.php -- --license_agreement_accepted "yes" --locale $MAGENTO_LOCALE --timezone $MAGENTO_TIMEZONE --default_currency $MAGENTO_DEFAULT_CURRENCY --db_host $MYSQL_HOST --db_name $MYSQL_DATABASE --db_user $MYSQL_USER --db_pass $MYSQL_PASSWORD --url $MAGENTO_URL --skip_url_validation "yes" --use_rewrites "no" --use_secure "no" --secure_base_url "" --use_secure_admin "no" --admin_firstname $MAGENTO_ADMIN_FIRSTNAME --admin_lastname $MAGENTO_ADMIN_LASTNAME --admin_email $MAGENTO_ADMIN_EMAIL --admin_username $MAGENTO_ADMIN_USERNAME --admin_password $MAGENTO_ADMIN_PASSWORD
-
-# uncomment to configure magento to use redis cache
-#sed -i 's/<active>false/<active>true/' app/etc/modules/Cm_RedisSession.xml
-#sed -i -e '/<session_save><!\[CDATA\[files\]\]><\/session_save>/{r app/etc/redis.conf' -e 'd}' app/etc/local.xml
+chmod +x /usr/local/bin/install-sampledata
+cd /var/www/html
+if [ -f ./app/etc/local.xml ]; then
+  echo "It appears Magento is already installed. Running server...";
+else
+	echo "Creating Mangeto CE Project";
+	rm -rf ./*
+	find ./ -type f -name '.*' -exec rm '{}' \;
+	cd /tmp && curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && tar xvf $MAGENTO_VERSION.tar.gz && mv magento-mirror-$MAGENTO_VERSION/* magento-mirror-$MAGENTO_VERSION/.htaccess /var/www/html
+	echo "sample data deploying";
+	install-sampledata
+	EXITCODE=$?; if [[ $EXITCODE != 0 ]]; then exit $EXITCODE; fi
+	echo "sample data deployed";
+	echo "installing Magento 1.9";
+	php -f /var/www/html/install.php -- \
+		--license_agreement_accepted "yes" --locale $MAGENTO_LOCALE --timezone $MAGENTO_TIMEZONE \
+		 --default_currency $MAGENTO_DEFAULT_CURRENCY --db_host $MYSQL_HOST --db_name $MYSQL_DATABASE \
+		 --db_user $MYSQL_USER --db_pass $MYSQL_PASSWORD \
+		 --url $MAGENTO_URL --skip_url_validation "yes" --use_rewrites "no" \
+		 --use_secure "no" --secure_base_url "" --use_secure_admin "no" \
+		 --admin_firstname $MAGENTO_ADMIN_FIRSTNAME --admin_lastname $MAGENTO_ADMIN_LASTNAME \
+		 --admin_email $MAGENTO_ADMIN_EMAIL --admin_username $MAGENTO_ADMIN_USERNAME --admin_password $MAGENTO_ADMIN_PASSWORD
+	EXITCODE=$?; if [[ $EXITCODE != 0 ]]; then exit $EXITCODE; fi
+	echo "Magento 1.9 installed";
+	cd /var/www/html
+	if ! [ -d "./.modman" ]; then
+		echo "modman not found."
+		echo "Installing modman";
+		bash < <(curl -s -L https://raw.github.com/colinmollenhour/modman/master/modman-installer)
+		echo "Setting up modman + sailthru";
+		source ~/.profile
+		modman init  
+		modman link /var/www/sailthru
+		echo "Enabling symlinks in Magento";
+		n98-magerun dev:symlinks --on --global
+		echo "Finished Sailthru setup"
+	fi
+fi
+echo "Re-owning files"
+chown -R www-data:www-data /var/www/html
+echo "Starting Apache"
+apache2-foreground
