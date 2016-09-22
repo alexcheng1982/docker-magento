@@ -1,5 +1,9 @@
 # Docker image for Magento 1.x
 
+[![](https://images.microbadger.com/badges/image/alexcheng/magento.svg)](http://microbadger.com/images/alexcheng/magento)
+
+[![Docker build](http://dockeri.co/image/alexcheng/magento)](https://hub.docker.com/r/alexcheng/magento/)
+
 This repo creates a Docker image for [Magento 1.x](http://magento.com/).
 
 #### Please note
