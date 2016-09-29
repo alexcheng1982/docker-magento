@@ -19,3 +19,4 @@ COPY ./bin/install-sampledata-1.9 /usr/local/bin/install-sampledata
 RUN chmod +x /usr/local/bin/install-sampledata
 
 VOLUME /var/www/htdocs
+RUN sed -i 's/\/var\/www\/html/\/var\/www\/htdocs/' /etc/apache2/sites-available/000-default.conf
