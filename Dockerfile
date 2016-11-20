@@ -13,10 +13,6 @@ COPY ./bin/install-magento /usr/local/bin/install-magento
 
 RUN chmod +x /usr/local/bin/install-magento
 
-COPY ./sampledata/magento-sample-data-1.6.1.0.tar.gz /opt/
-COPY ./bin/install-sampledata-1.6_1.8 /usr/local/bin/install-sampledata
-RUN chmod +x /usr/local/bin/install-sampledata
-
 # Apply patches
 COPY ./patches/*.sh /var/www/htdocs/
 RUN cd /var/www/htdocs && /bin/bash PATCH_SUPEE-2629_EE_1.12.0.0_v1-2015-02-12-04-30-34.sh
