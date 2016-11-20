@@ -71,7 +71,7 @@ Use `/usr/local/bin/install-sampledata` to install sample data for Magento.
 docker exec -it <container id> install-sampledata
 ```
 
-Magento 1.9 sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data). Magento 1.6 - 1.8 uses the [official sample data](http://devdocs.magento.com/guides/m1x/ce18-ee113/ht_magento-ce-sample.data.html).
+Magento 1.9 sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data). Magento 1.6 uses the [official sample data](http://devdocs.magento.com/guides/m1x/ce18-ee113/ht_magento-ce-sample.data.html).
 
 For Magento 1.7 and 1.8, the sample data from 1.6 doesn't work properly as claimed in the offcial website and causes database errors, so the `install-sampledata` script is removed for 1.7 and 1.8.
 
