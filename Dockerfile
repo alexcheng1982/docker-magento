@@ -15,10 +15,6 @@ COPY ./bin/install-magento /usr/local/bin/install-magento
 
 RUN chmod +x /usr/local/bin/install-magento
 
-COPY ./sampledata/magento-sample-data-1.6.1.0.tar.gz /opt/
-COPY ./bin/install-sampledata-1.6_1.8 /usr/local/bin/install-sampledata
-RUN chmod +x /usr/local/bin/install-sampledata
-
 VOLUME /var/www/htdocs
 RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/htdocs/' /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/htdocs/' /etc/apache2/sites-available/default-ssl.conf
