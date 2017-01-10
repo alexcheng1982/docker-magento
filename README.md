@@ -114,3 +114,16 @@ If you use default base url (http://local.magento) or other test url, you need t
 ## Redis Cache
 
 If you want to use Redis as Cache backend see comments in Dockerfile and bin/install-magento
+
+## Modman
+Modman is a [Magento module manager](https://github.com/colinmollenhour/modman) that allows you to leave your work siloed from the actual Magento codebase via symlinks. With modman, you can sync plugin or theme work without keeping a persistent volume (or using a hidden volume).
+
+```bash
+# from htdocs
+modman init
+modman link /path/to/plugin
+```
+And to update symlinks:
+```bash
+modman deploy
+```
