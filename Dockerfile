@@ -1,6 +1,6 @@
 FROM occitech/magento:php5.5-apache
 
-ENV MAGENTO_VERSION 1.9.2.4
+ENV MAGENTO_VERSION 1.9.3.7
 
 RUN cd /tmp && \
     curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && \
