@@ -16,7 +16,7 @@ This repo creates a Docker image for [Magento 1.x](http://magento.com/).
 
 Version | Git branch | Tag name
 --------| ---------- |---------
-1.9.2.4 | master     | latest
+1.9.3.7 | master     | latest
 1.9.1.1 | 1.9.1.0    | 1.9.1.0
 1.8.1.0 | 1.8.1.0    | 1.8.1.0
 1.7.0.2 | 1.7.0.2    | 1.7.0.2
@@ -34,7 +34,7 @@ docker run -p 80:80 alexcheng/magento
 
 Then finish Magento installation using web UI. You need to have an existing MySQL server.
 
-Magento is installed into `/var/www/htdocs` folder.
+Magento is installed into `/var/www/html` folder.
 
 ### Use Docker Compose
 
@@ -43,18 +43,31 @@ Magento is installed into `/var/www/htdocs` folder.
 A sample `docker-compose.yml` can be found in this repo.
 
 ```yaml
-web:
-  image: alexcheng/magento
-  ports:
-    - "80:80"
-  links:
-    - mysql
-  env_file:
-    - env
-mysql:
-  image: mysql:5.6.23
-  env_file:
-    - env
+version: '3.0'
+
+services:
+  web:
+    image: alexcheng/magento
+    ports:
+      - "80:80"
+    links:
+      - db
+    env_file:
+      - env
+  db:
+    image: mysql:5.6.23
+    volumes:
+      - db-data:/var/lib/mysql/data
+    env_file:
+      - env
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8580:80"
+    links:
+      - db
+volumes:
+  db-data:
 ```
 
 Then use `docker-compose up -d` to start MySQL and Magento server.
