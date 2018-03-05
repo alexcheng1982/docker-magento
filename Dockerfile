@@ -1,6 +1,6 @@
 FROM alexcheng/apache2-php5:5.6.33
 
-ENV MAGENTO_VERSION 1.9.3.7
+ENV MAGENTO_VERSION 1.9.3.8
 
 RUN a2enmod rewrite
 
