@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-yes | cp -rf /opt/Mysql4.php /var/www/htdocs/app/code/core/Mage/Install/Model/Installer/Db/
+yes | cp -rf /opt/Mysql4.php /var/www/html/app/code/core/Mage/Install/Model/Installer/Db/
