@@ -1,12 +1,22 @@
-# Docker image for Magento
+# Docker image for Magento 1.x
 
-This repo creates a Docker image for [Magento](http://magento.com/).
+[![](https://images.microbadger.com/badges/image/alexcheng/magento.svg)](http://microbadger.com/images/alexcheng/magento)
+
+[![Docker build](http://dockeri.co/image/alexcheng/magento)](https://hub.docker.com/r/alexcheng/magento/)
+
+This repo creates a Docker image for [Magento 1.x](http://magento.com/).
+
+#### Please note
+
+> The primary goal of this repo is to create Docker images for Magento 1.x development and testing, especially for extensions and themes development. It lacks essential support for production deployment, e.g. Varnish and Redis. Use this wisely for production deployment.
+
+> This repo is only for Magento 1.x. If you are looking for Magento 2.x, check out [alexcheng1982/docker-magento2](https://github.com/alexcheng1982/docker-magento2).
 
 ## Magento versions
 
 Version | Git branch | Tag name
 --------| ---------- |---------
-1.9.2.4 | master     | latest
+1.9.3.8 | master     | latest
 1.9.1.1 | 1.9.1.0    | 1.9.1.0
 1.8.1.0 | 1.8.1.0    | 1.8.1.0
 1.7.0.2 | 1.7.0.2    | 1.7.0.2
@@ -24,7 +34,7 @@ docker run -p 80:80 alexcheng/magento
 
 Then finish Magento installation using web UI. You need to have an existing MySQL server.
 
-Magento is installed into `/var/www/htdocs` folder.
+Magento is installed into `/var/www/html` folder.
 
 ### Use Docker Compose
 
@@ -33,18 +43,31 @@ Magento is installed into `/var/www/htdocs` folder.
 A sample `docker-compose.yml` can be found in this repo.
 
 ```yaml
-web:
-  image: alexcheng/magento
-  ports:
-    - "80:80"
-  links:
-    - mysql
-  env_file:
-    - env
-mysql:
-  image: mysql:5.6.23
-  env_file:
-    - env
+version: '3.0'
+
+services:
+  web:
+    image: alexcheng/magento:1.9.1.1
+    ports:
+      - "80:80"
+    links:
+      - db
+    env_file:
+      - env
+  db:
+    image: mysql:5.6.23
+    volumes:
+      - db-data:/var/lib/mysql/data
+    env_file:
+      - env
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8580:80"
+    links:
+      - db
+volumes:
+  db-data:
 ```
 
 Then use `docker-compose up -d` to start MySQL and Magento server.
@@ -61,7 +84,9 @@ Use `/usr/local/bin/install-sampledata` to install sample data for Magento.
 docker exec -it <container id> install-sampledata
 ```
 
-Magento 1.9 sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data). Magento 1.6 - 1.8 uses the [official sample data](http://devdocs.magento.com/guides/m1x/ce18-ee113/ht_magento-ce-sample.data.html).
+Magento 1.9 sample data is compressed version from [Vinai/compressed-magento-sample-data](https://github.com/Vinai/compressed-magento-sample-data). Magento 1.6 uses the [official sample data](http://devdocs.magento.com/guides/m1x/ce18-ee113/ht_magento-ce-sample.data.html).
+
+For Magento 1.7 and 1.8, the sample data from 1.6 doesn't work properly as claimed in the offcial website and causes database errors, so the `install-sampledata` script is removed for 1.7 and 1.8.
 
 ## Magento installation script
 
@@ -79,7 +104,7 @@ MAGENTO_DEFAULT_CURRENCY  | Magento default currency | NZD
 MAGENTO_URL               | Magento base url | http://local.magento
 MAGENTO_ADMIN_FIRSTNAME   | Magento admin firstname | Admin
 MAGENTO_ADMIN_LASTNAME    | Magento admin lastname | MyStore
-MAGENTO_ADMIN_EMAIL       | Magento admin email | amdin@example.com
+MAGENTO_ADMIN_EMAIL       | Magento admin email | admin@example.com
 MAGENTO_ADMIN_USERNAME    | Magento admin username | admin
 MAGENTO_ADMIN_PASSWORD    | Magento admin password | magentorocks1
 
@@ -97,4 +122,21 @@ After calling `install-magento`, Magento is installed and ready to use. Use prov
 
 If you use default base url (http://local.magento) or other test url, you need to [modify your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/) to map the host name to docker container. For Boot2Docker, use `boot2docker ip` to find the IP address.
 
-**Important**: If you do not use the deafult `MAGENTO_URL` you must use a hostname that contains a dot within it (e.g `foo.bar`), otherwise the [Magento admin panel login won't work](http://magento.stackexchange.com/a/7773).
+**Important**: If you do not use the default `MAGENTO_URL` you must use a hostname that contains a dot within it (e.g `foo.bar`), otherwise the [Magento admin panel login won't work](http://magento.stackexchange.com/a/7773).
+
+## Redis Cache
+
+If you want to use Redis as Cache backend see comments in Dockerfile and bin/install-magento
+
+## Modman
+Modman is a [Magento module manager](https://github.com/colinmollenhour/modman) that allows you to leave your work siloed from the actual Magento codebase via symlinks. With modman, you can sync plugin or theme work without keeping a persistent volume (or using a hidden volume).
+
+```bash
+# from htdocs
+modman init
+modman link /path/to/plugin
+```
+And to update symlinks:
+```bash
+modman deploy
+```
