@@ -33,8 +33,9 @@ RUN cd $INSTALL_DIR && /bin/bash PATCH_SUPEE-2629_EE_1.12.0.0_v1-2015-02-12-04-3
 COPY ./patches/Mysql4.php /opt/
 RUN chown www-data:www-data /opt/Mysql4.php
 COPY ./bin/enable-mysql-5.6-support /usr/local/bin/enable-mysql-5.6-support
-RUN chmod +x /usr/local/bin/enable-mysql-5.6-support && \
-  /usr/local/bin/enable-mysql-5.6-support
+RUN chmod +x /usr/local/bin/enable-mysql-5.6-support \
+  && sleep 1 \
+  && /usr/local/bin/enable-mysql-5.6-support
 
 VOLUME /var/www/htdocs
 RUN bash -c 'bash < <(curl -s -L https://raw.github.com/colinmollenhour/modman/master/modman-installer)'
