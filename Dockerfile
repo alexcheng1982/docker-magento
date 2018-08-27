@@ -6,15 +6,16 @@ RUN a2enmod rewrite
 
 ENV INSTALL_DIR /var/www/html
 
-RUN cd /tmp && \
-    curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && \
-    tar xvf $MAGENTO_VERSION.tar.gz && \
-    mv magento-mirror-$MAGENTO_VERSION/* magento-mirror-$MAGENTO_VERSION/.htaccess $INSTALL_DIR
+#RUN cd /tmp && \
+    #curl https://codeload.github.com/OpenMage/magento-mirror/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && \
+    #tar xvf $MAGENTO_VERSION.tar.gz && \
+    #mv magento-mirror-$MAGENTO_VERSION/* magento-mirror-$MAGENTO_VERSION/.htaccess $INSTALL_DIR
 
 RUN chown -R www-data:www-data $INSTALL_DIR
 
 RUN apt-get update && \
-    apt-get install -y mysql-client-5.7 libxml2-dev libmcrypt4 libmcrypt-dev libpng-dev libjpeg-dev libfreetype6 libfreetype6-dev
+    apt-get install -y mysql-client-5.7 libxml2-dev libmcrypt4 libmcrypt-dev libpng-dev libjpeg-dev libfreetype6 libfreetype6-dev git \
+    cd /tmp && git clone https://github.com/dlqkadl/magento-mirror /tmp && mv /tmp/* /tmp/.htaccess $INSTALL_DIR
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mcrypt
